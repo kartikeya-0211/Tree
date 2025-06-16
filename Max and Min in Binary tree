@@ -1,0 +1,33 @@
+class TreeNode:
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def findMaximum(root):
+    if root is None:
+        return float('-inf') 
+    
+    left_max = findMaximum(root.left)
+    right_max = findMaximum(root.right)
+    
+    return max(root.data, left_max, right_max)
+
+def findMinimum(root):
+    if root is None:
+        return float('inf')
+    
+    left_min = findMinimum(root.left)
+    right_min = findMinimum(root.right)
+    
+    return min(root.data, left_min, right_min)
+
+if __name__ == "__main__":
+    root = TreeNode(1)
+    root.left = TreeNode(10)
+    root.right = TreeNode(20)
+    root.left.left = TreeNode(4)
+    root.left.right = TreeNode(8)
+
+    print("Maximum value in the tree:", findMaximum(root))
+    print("Minimum value in the tree:", findMinimum(root))
